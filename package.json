@@ -1,0 +1,16 @@
+{
+  "name": "range-slider",
+  "version": "0.0.1",
+  "description": "A range slider component",
+  "main": "index.js",
+  "scripts": {
+    "start": "budo demo/demo.js:bundle.js --live --open",
+    "build": "browserify demo/demo.js > bundle.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "^17.0.0",
+    "budo": "^11.7.0"
+  }
+}
