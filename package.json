@@ -1,8 +1,8 @@
 {
-  "name": "range-slider",
+  "name": "input-slider",
   "version": "0.0.1",
-  "description": "A range slider component",
-  "main": "index.js",
+  "description": "A slider component",
+  "main": "src/index.js",
   "scripts": {
     "start": "budo demo/demo.js:bundle.js --live --open",
     "build": "browserify demo/demo.js > bundle.js"
