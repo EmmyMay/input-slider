@@ -3,11 +3,11 @@ function rangeSlider(opts) {
 
   // creating dom elements
   const el = createElement();
+  const shadow = el.attachShadow({ mode: "closed" });
   const input = createElement({ el: "input" });
   const bar = createElement({ className: "bar" });
   const ruler = createElement({ className: "ruler" });
   const fill = createElement({ className: "fill" });
-  const shadow = el.attachShadow({ mode: "closed" });
 
   // set input attributes
   input.type = "range";
