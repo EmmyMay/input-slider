@@ -1,22 +1,40 @@
 function rangeSlider(opts) {
   const { theme } = opts;
 
-  const styleSheet = new CSSStyleSheet();
-  styleSheet.replaceSync(theme);
-
-  const el = document.createElement("div");
+  // creating dom elements
+  const el = createElement();
+  const input = createElement({ el: "input" });
+  const bar = createElement({ className: "bar" });
+  const ruler = createElement({ className: "ruler" });
+  const fill = createElement({ className: "fill" });
   const shadow = el.attachShadow({ mode: "closed" });
 
-  const inputContainer = document.createElement("div");
-  const input = document.createElement("input");
   input.type = "range";
 
-  inputContainer.append(input);
-  shadow.appendChild(inputContainer);
+  // appending dom elements
+  appendElement(bar, ruler, fill);
+  appendElement(shadow, input, bar);
 
-  shadow.adoptedStyleSheets = [styleSheet];
+  // component styling
+  styleComponent(theme, shadow);
 
   return el;
 }
 
+const styleComponent = (theme, shadow) => {
+  const styleSheet = new CSSStyleSheet();
+  styleSheet.replaceSync(theme);
+  shadow.adoptedStyleSheets = [styleSheet];
+};
+
+const createElement = ({ el = "div", className } = {}) => {
+  const ele = document.createElement(el);
+  if (className) ele.classList.add(className);
+
+  return ele;
+};
+
+const appendElement = (target, ...children) => {
+  target.append(...children);
+};
 module.exports = rangeSlider;
