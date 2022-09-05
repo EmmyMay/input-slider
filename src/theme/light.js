@@ -21,17 +21,11 @@ input {
 
 .fill {
   position: absolute;
-  width: 30%;
   height: 12px;
   background-color: grey;
 }
 
-input:focus + .bar .fill,
-input:focus-within + .bar .fill,
-input:active + .bar .fill
- {
-  background-color: blueviolet;
-}
+
 
   .bar {
   width: 100%;
