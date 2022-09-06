@@ -51,19 +51,21 @@ const appendElement = (target, ...children) => {
 const modifyElement = (el, sliderValue, max = 100, shadow) => {
   const elementWidth = (sliderValue / max) * 100;
   el.style.width = elementWidth + "%";
-  shadow.host.style.setProperty("--range-color", "#a75ced");
+  shadow.host.style.setProperty("--range-color", "hsl(271, 80%, 65%)");
+  shadow.host.style.setProperty("--thumb-color", "hsl(271, 80%, 65%)");
   if (elementWidth > 50) {
     shadow.host.style.setProperty(
       "--range-color",
-      "linear-gradient(90deg, rgba(167,92,237,1) 50%, rgba(65,237,183,1) 80%)",
-      "important"
+      "linear-gradient(90deg, rgba(167,92,237,1) 50%, rgba(65,237,183,1) 80%)"
     );
+    shadow.host.style.setProperty("--thumb-color", "hsl(161, 83%, 59%)");
   }
   if (elementWidth > 80) {
     shadow.host.style.setProperty(
       "--range-color",
       "linear-gradient(90deg, rgba(167,92,237,1) 31%, rgba(65,237,183,1) 52%, rgba(65,236,237,1) 80%)"
     );
+    shadow.host.style.setProperty("--thumb-color", "hsl(180, 83%, 59%)");
   }
 };
 
