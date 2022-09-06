@@ -1,13 +1,24 @@
 {
   "name": "input-slider",
   "version": "0.0.1",
-  "description": "A slider component",
+  "description": "A custom slider component",
   "main": "src/index.js",
   "scripts": {
     "start": "budo demo/demo.js:bundle.js --live --open",
     "build": "browserify demo/demo.js > bundle.js"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EmmyMay/input-slider"
+  },
+  "keywords": [
+    "wizard",
+    "amigos",
+    "input",
+    "slider",
+    "range"
+  ],
+  "author": "EmmyB",
   "license": "ISC",
   "devDependencies": {
     "browserify": "^17.0.0",
