@@ -22,7 +22,7 @@ function rangeSlider(opts) {
   // handling events
   input.oninput = (e) => {
     const sliderValue = Number(e.target.value);
-    modifyElement(fill, sliderValue, max);
+    modifyElement(fill, sliderValue, max, shadow);
   };
 
   // component styling
@@ -48,17 +48,22 @@ const appendElement = (target, ...children) => {
   target.append(...children);
 };
 
-const modifyElement = (el, sliderValue, max = 100) => {
+const modifyElement = (el, sliderValue, max = 100, shadow) => {
   const elementWidth = (sliderValue / max) * 100;
   el.style.width = elementWidth + "%";
-  el.style.background = "#a75ced";
+  shadow.host.style.setProperty("--range-color", "#a75ced");
   if (elementWidth > 50) {
-    el.style.background =
-      "linear-gradient(90deg, rgba(167,92,237,1) 50%, rgba(65,237,183,1) 80%)";
+    shadow.host.style.setProperty(
+      "--range-color",
+      "linear-gradient(90deg, rgba(167,92,237,1) 50%, rgba(65,237,183,1) 80%)",
+      "important"
+    );
   }
   if (elementWidth > 80) {
-    el.style.background =
-      "linear-gradient(90deg, rgba(167,92,237,1) 31%, rgba(65,237,183,1) 52%, rgba(65,236,237,1) 80%)";
+    shadow.host.style.setProperty(
+      "--range-color",
+      "linear-gradient(90deg, rgba(167,92,237,1) 31%, rgba(65,237,183,1) 52%, rgba(65,236,237,1) 80%)"
+    );
   }
 };
 

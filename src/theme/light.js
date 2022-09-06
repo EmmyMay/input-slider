@@ -5,6 +5,7 @@ function theme() {
     height: 1rem;
     position: relative;
     --transparent: hsla(0, 0%, 0%, 0);
+    --range-color: #a75ced;
   }
 
 
@@ -16,7 +17,7 @@ input {
   width: 100%;
   z-index: 2;
   -webkit-appearance: none;
-  background-color: transparent;
+  background-color: var(--transparent);
 }
 
 .fill {
@@ -39,6 +40,13 @@ input {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+input:focus + .bar .fill,
+input:focus-within + .bar .fill,
+input:active + .bar .fill
+ {
+  background: var(--range-color);
 }
 
 
