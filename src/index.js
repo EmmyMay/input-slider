@@ -1,4 +1,4 @@
-function rangeSlider(opts) {
+function rangeSlider(opts, on = {}) {
   const { theme, min = 0, max = 100 } = opts;
 
   // creating dom elements
@@ -24,6 +24,9 @@ function rangeSlider(opts) {
     const sliderValue = Number(e.target.value);
     modifyElement(fill, sliderValue, max, shadow);
   };
+  Object.keys(on).map((K) => {
+    return (input[`on${K}`] = on[K]);
+  });
 
   // component styling
   styleComponent(theme, shadow);
