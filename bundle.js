@@ -13,7 +13,9 @@ const range = rangeSlider(options);
 document.body.append(title, range);
 
 },{"..":2,"../src/theme":4}],2:[function(require,module,exports){
-function rangeSlider(opts) {
+let id = 0;
+
+function rangeSlider(opts, protocol, on = {}) {
   const { theme, min = 0, max = 100 } = opts;
 
   // creating dom elements
@@ -23,6 +25,19 @@ function rangeSlider(opts) {
   const bar = createElement({ className: "bar" });
   const ruler = createElement({ className: "ruler" });
   const fill = createElement({ className: "fill" });
+
+  // event name
+  const componentName = `slider-${id++}`;
+
+  // Component communication
+  const notify = protocol({ from: componentName }, listen);
+  function listen(message) {
+    const { type, data } = message;
+    if (type === "update") {
+      input.value = data;
+      modifyElement(fill, data, max, shadow);
+    }
+  }
 
   // set input attributes
   input.type = "range";
@@ -38,7 +53,11 @@ function rangeSlider(opts) {
   input.oninput = (e) => {
     const sliderValue = Number(e.target.value);
     modifyElement(fill, sliderValue, max, shadow);
+    notify({ from: componentName, type: "update", data: sliderValue });
   };
+  Object.keys(on).map((K) => {
+    return (input[`on${K}`] = on[K]);
+  });
 
   // component styling
   styleComponent(theme, shadow);
