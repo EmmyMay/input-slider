@@ -7,9 +7,9 @@ function rangeSlider(opts, protocol, on = {}) {
   const el = createElement();
   const shadow = el.attachShadow({ mode: "closed" });
   const input = createElement({ el: "input" });
-  const bar = createElement({ className: "bar" });
-  const ruler = createElement({ className: "ruler" });
-  const fill = createElement({ className: "fill" });
+  const bar = createElement({ attr: "class", attrVal: "bar" });
+  const ruler = createElement({ attr: "class", attrVal: "ruler" });
+  const fill = createElement({ attr: "class", attrVal: "fill" });
 
   // event name
   const componentName = `slider-${id++}`;
@@ -56,10 +56,9 @@ const styleComponent = (theme, shadow) => {
   shadow.adoptedStyleSheets = [styleSheet];
 };
 
-const createElement = ({ el = "div", className } = {}) => {
+const createElement = ({ el = "div", attr, attrVal } = {}) => {
   const ele = document.createElement(el);
-  if (className) ele.classList.add(className);
-
+  if (attr && attrVal) ele.setAttribute(attr, attrVal);
   return ele;
 };
 
