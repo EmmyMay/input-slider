@@ -4,12 +4,20 @@ function rangeSlider(opts, protocol, on = {}) {
   const { theme, min = 0, max = 100 } = opts;
 
   // creating dom elements
-  const el = createElement();
+  const el = document.createElement("div");
   const shadow = el.attachShadow({ mode: "closed" });
-  const input = createElement({ el: "input" });
-  const bar = createElement({ attr: "class", attrVal: "bar" });
-  const ruler = createElement({ attr: "class", attrVal: "ruler" });
-  const fill = createElement({ attr: "class", attrVal: "fill" });
+
+  const parser = document.createElement("div");
+
+  parser.innerHTML = `
+  <input/>
+  <div class="bar">
+  <div class="ruler"></div>
+  <div class="fill"></div>
+  </div>
+`;
+  const [input, bar] = parser.children;
+  const [, fill] = bar.children;
 
   // event name
   const componentName = `slider-${id++}`;
@@ -31,8 +39,7 @@ function rangeSlider(opts, protocol, on = {}) {
   input.value = min;
 
   // appending dom elements
-  appendElement(bar, ruler, fill);
-  appendElement(shadow, input, bar);
+  shadow.append(parser);
 
   // handling events
   input.oninput = (e) => {
@@ -54,16 +61,6 @@ const styleComponent = (theme, shadow) => {
   const styleSheet = new CSSStyleSheet();
   styleSheet.replaceSync(theme);
   shadow.adoptedStyleSheets = [styleSheet];
-};
-
-const createElement = ({ el = "div", attr, attrVal } = {}) => {
-  const ele = document.createElement(el);
-  if (attr && attrVal) ele.setAttribute(attr, attrVal);
-  return ele;
-};
-
-const appendElement = (target, ...children) => {
-  target.append(...children);
 };
 
 const modifyElement = (el, sliderValue, max = 100, shadow) => {
