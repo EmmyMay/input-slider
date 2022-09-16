@@ -1,26 +1,23 @@
 let id = 0;
 
 function rangeSlider(opts, protocol, on = {}) {
+  // event name
+  const componentName = `slider-${id++}`;
   const { theme, min = 0, max = 100 } = opts;
 
   // creating dom elements
   const el = document.createElement("div");
   const shadow = el.attachShadow({ mode: "closed" });
 
-  const parser = document.createElement("div");
-
-  parser.innerHTML = `
+  shadow.innerHTML = `
   <input/>
   <div class="bar">
   <div class="ruler"></div>
   <div class="fill"></div>
   </div>
 `;
-  const [input, bar] = parser.children;
+  const [input, bar] = shadow.children;
   const [, fill] = bar.children;
-
-  // event name
-  const componentName = `slider-${id++}`;
 
   // Component communication
   const notify = protocol({ from: componentName }, listen);
@@ -37,9 +34,6 @@ function rangeSlider(opts, protocol, on = {}) {
   input.min = min;
   input.max = max;
   input.value = min;
-
-  // appending dom elements
-  shadow.append(parser);
 
   // handling events
   input.oninput = (e) => {
